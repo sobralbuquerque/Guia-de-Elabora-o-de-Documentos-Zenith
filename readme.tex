@@ -1,0 +1,256 @@
+% !TEX program = xelatex
+\documentclass[brazilian, 11pt, oneside, a4paper]{article}
+\input{r/preamble.tex} % Arquivo com pacotes e comandos
+\newcommand{\Verb}[1]{{\small \texttt{#1}}}
+\usepackage{verbatim}
+\makeatletter
+\newcommand{\codeandmath}[1]{%
+    \mbox{\ttfamily \detokenize{#1}} & \mbox{#1}
+}
+\makeatother
+% \drafttrue % Modo draft, imagens de estilização não são carregadas.
+
+\titulo{Guia de elaboração de documentos}
+% \nucleo{Núcleo de X}
+\departamento{Departamento de Estruturas}       
+\Criacao{21 de abril de 2020}
+\data{} % Apagar argumento caso queira omitir data. (comentar esta linha não funciona) -> \data{}
+
+\Resumo{Este documento pretende auxiliar a elaboração de documentos do \Zenith, especificando os formatos que devem ser seguidos, bem como fornecendo um template com o formato e arquivos necessários em seu projeto.}
+
+\begin{document}
+\setFaixa
+\geraTitulo
+\sumario
+
+\section{Como utilizar este guia}\label{sec:ComoUtilizar}
+
+Caso você já saiba como funciona e apenas queira o template para criar seu documento, \href{https://www.overleaf.com/6265616139jqnrtzxkvzvp}{clique aqui}.
+
+Este documento foi feito para ser melhor lido junto ao seu projeto no Overleaf.
+
+Supondo que esse seja o caso, atualmente o documento principal está selecionado como sendo \verb$readme.tex$. Para ver algum outro exemplo de documento, clique em seu arquivo \verb$.tex$ e compile novamente. Eles são \verb$proposta_projeto$, \verb$protocolo$ e \verb$tarefa$.
+
+Ao longo do documento, haverá sugestões para fazer modificações de preâmbulo. Isso é melhor feito utilizando este (\verb$readme.tex$) arquivo como principal ou o \verb$main.tex$ do arquivo clonado do template (não altere o template!).
+
+
+\section{Como elaborar documentos}\label{sec:ComoElaborarDocumentos}
+
+O projeto pode ser criado de diversas maneiras, mas deve sempre seguir a mesma estrutura de diretórios, conforme \Cref{fig:DisposicaoDiretorio}.
+
+\addFigure{0.6}{DisposicaoDiretorio}{Disposição dos diretórios do projeto.}
+
+Os nomes das pastas\verb$ r$, \verb$figures$ e \verb$template$, bem como o arquivo \verb$preamble.tex$ devem sempre ser mantidos, sendo que os últimos dois também devem estar atualizados na hora de compilar a versão final do documento.
+
+É importante garantir que seu projeto esteja sendo compilado pelo XeLaTeX. No Overleaf, isso é garantido ao ir no Menu (canto superior esquerdo) e escolher XeLaTeX em ``Compiler'' dentro das configurações. Para compilar em seu computador, o \textit{magic comment} \verb$% !TEX program = xelatex$ no início do documento garante a compilação como desejado (testado apenas para o LaTeX Workshop do VS Code).
+
+\subsection{Criar projeto no Overleaf}
+
+A fim de criar o seu documento, a maneira aconselhada é de clonar o \href{https://www.overleaf.com/6265616139jqnrtzxkvzvp}{Projeto Template}
+no Overleaf. Esse projeto possui a estrutura de diretórios desejada e os arquivos relevantes linkados a este projeto principal. Desse modo, quando alguma atualização acontecer nos templates do Zenith -- i.e., na forma como os documentos devem ser apresentados --, você poderá atualizar em seu documento ao apertar o botão ``Refresh'' no arquivo relevante.
+
+O processo de criação está ilustrado na \Cref{fig:CopiarProjetoOverleaf}.
+
+\addFigure{0.5}{CopiarProjetoOverleaf}{Como criar o seu projeto de documento do Zenith no Overleaf.}
+
+Após isso, deve-se alterar o nome do projeto para um mais significativo e fazer as mudanças (quando necessário) no seu preâmbulo para que o documento esteja no formato adequado.
+
+O arquivo \verb$preamble.tex$ \textbf{nunca} deve ser alterado em um projeto. Caso haja a necessidade de se criar adicionar um comando ou instalar um pacote, isso deve ser feito no arquivo principal ou chamando um novo arquivo de comandos, como \verb$r/comandos.tex$ por exemplo.
+
+\subsection{Gerar título}
+
+Entre os comandos de \verb$\documentclass$ e \verb$\begin{document}$, nós temos o que chamamos de \textit{preâmbulo}. Dentro deste, nós podemos instalar pacotes, definir comandos e parâmetros. Para a geração do título do seu documento (que é feita com um comando), nós precisamos definir alguns parâmetros:
+
+\begin{itemize}
+    \item \verb$\titulo{Seu título aqui}$ usa o argumento como título do documento (neste caso, ``Seu título aqui''). Ele é um comando obrigatório para todos os documentos.
+    \item \verb$\data{\today}$ insere a data atual no documento na formatação original. Esta linha de código é redundante, pois esse é o valor padrão dela, então apagá-la não muda nada.
+    \begin{itemize}
+        \item Substitui-la por \verb$\data{}$ apaga a data do documento.
+        \item Substitui-la por \verb$\data{01 de janeiro de 2000}$ fixa o valor da data para ``01 de janeiro de 2000''.
+        \item \verb$\data{01/01/2000}$ muda o formato da data para ``01/01/2000''.
+    \end{itemize}
+    \item Comandos de instâncias:    
+    \begin{itemize}
+        \item \verb$\nucleo{Núcleo de X}$ insere o argumento ``Núcleo de X'' como uma instância do documento. Ela aparece no título que foi gerado e no cabeçalho.
+        \item \verb$\departamento{Departamento de Y}$ insere o argumento ``Departamento de Y'' como uma instância do documento. Ela aparece no título que foi gerado e pode aparecer no cabeçalho, caso não haja um núcleo definido.
+        \item caso não haja \verb$\nucleo$ ou \verb$\departamento$ definidos, o cabeçalho apenas insere \Zenith.
+    \end{itemize}
+    \item \verb$\Criacao{dd de mês de aaaa}$ fornece um valor de ``dd de mês de aaaa'' para a data de criação do seu documento, bem como muda o formato da \verb$\data$ para ``Última atualização:'' e garante a quebra de página no título.
+    \item \verb$\Resumo{Conteúdo do resumo}$ cria um ambiente de resumo na sua página de título e garante a quebra de página.
+    \item \verb$\protocolo{código do protocolo}$ usa o argumento ``código do protocolo'' como código/número do documento. Ele apenas é utilizado para documentos do tipo Protocolo, que utilizam o comando \verb$\geraTituloProtocolo$.
+    \item \verb$\tipo{Tipo de Documento}$ usa o argumento ``Tipo de Documento'' como o estilo do documento. Ele apenas é utilizado para documentos que utilizam o comando \verb$\setTema$.
+    \item \verb$\drafttrue$ transforma o documento em um modo Draft. Neste caso, o documento não carrega nenhuma imagem de formatação e imprime na primeira página a palavra "DRAFT" como plano de fundo, com baixa opacidade. Ele é feito para um carregamento mais rápido de documentos muito grandes.
+
+\end{itemize}
+
+Experimente comentar e descomentar as linhas com esses valores (exceto a de título) e veja a mudança no documento. Ao fim, deixe do jeito que estava anteriormente.
+
+\subsection{Documento}
+
+Depois do preâmbulo, o documento começa, mas ainda há comandos para a formatação necessários:
+
+\begin{itemize}
+    \item Exatamente um comando do tipo \verb$\set$ deve ser utilizado. Ele formata a página de título, além dos cabeçalho e posição da numeração das páginas do resto do documento.
+    \begin{itemize}
+        \item \verb$\setFaixa$ é o comando mais comum (e utilizado neste documento), ele gera o título com uma faixa preta com a parte inicial do logotipo do Zenith (o Z) na primeira página.
+        \item \verb$\setTema$ não cria a faixa. Ele deve ser utilizado apenas quando o comando do tipo \verb$\geraTitulo$ gerar uma página de título com o Logo do Zenith inteiro, como é o caso do \verb$\geraTituloProjeto$, visto no documento \\ \verb$\proposta_projeto.tex$. 
+    \end{itemize}
+    \item Exatamente um comando do tipo \verb$\geraTitulo$ deve ser utilizado. Ele utiliza os valores dos parâmetros definidos no preâmbulo e imprime uma página de título no documento.
+    \begin{itemize}
+        \item \verb$\geraTitulo$ é o comando mais comum (e utilizado neste documento). Ele ignora os comandos \verb$\protocolo$ e \verb$\tipo$.
+        \item \verb$\geraTituloProtocolo$ exige que os parâmetros \verb$\protocolo$, \verb$\Criacao$ sejam definidos e os imprime na tela. Pode-se observá-lo no arquivo \\ \verb$protocolo.tex$. 
+        \item \verb$\geraTituloProjeto$  exige que um parâmetro \verb$\tipo$ seja definido e ignora o valor de \verb$\Criacao$. Ele gera uma página de título com o Logo do Zenith, de modo que ele deve ser utilizado com o comando \verb$\setTema$. Pode-se observá-lo no arquivo \verb$proposta_proje$ \verb$to.tex$.
+    \end{itemize}
+    \item \verb$\sumario$ gera um sumário sem cabeçalho para seu documento e quebra a página.
+\end{itemize}
+
+
+Defina um valor de \verb$\tipo$ no preâmbulo e troque o comando \verb$\setFaixa$ por \verb$\setTema$ para ver a diferença. Também defina os parâmetros necessários e troque o comando tipo \verb$\geraTitulo$ e comente e descomente o comando \verb$\sumario$ para ver a diferença. Caso faça isso neste documento, volte para como estava antes.
+
+Após isso, você pode colocar o conteúdo do seu documento, seja no arquivo principal, seja num arquivo de conteúdo, como feito no \verb$protocolo.tex$, chamando o arquivo \verb$r/z001.tex$. Você também pode ter vários arquivos de conteúdo para documentos muito grandes. São boas práticas colocá-los dentro do diretório\verb$ r$.
+
+\section{Exemplos}\label{sec:Exemplos}
+Esta seção é direcionada principalmente para quem não tem costume de escrever em LaTeX. No entanto, serão explicados alguns comandos definidos no \verb$r/preamble.tex$, bem como as boas práticas na escrita de relatórios para a uniformização destes.
+
+\subsection{Valores numéricos}
+O pacote \verb$siunitx$ fornece uma maneira de uniformizar os valores numéricos (e suas unidades). Usá-lo garante a mesma formatação -- e.g., separação com vírgulas ou com pontos, $i$ ou $j$ como unidade imaginária, como expressar potências de 10 --, bem como manter a mesma aparência em ambientes de matemática ou não.
+
+Por exemplo, veja as diferentes possibilidades de aparência utilizando ou não o pacote:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+\toprule
+    Código & Sem \verb$siunitx$  &  Código \verb$siunitx$ & Com \verb$siunitx$ \\ \midrule
+    \codeandmath{$F=10.0 N$}     &  \codeandmath{$F=\SI{10.0}{N}$} \\
+    \codeandmath{$F=10,0 N$}     &  \codeandmath{$F=\SI{10,0}{N}$} \\
+    \codeandmath{$F=$10,0 N}     &  \codeandmath{$F=\SI{10,0}{N}$} \\
+    \codeandmath{$3,4\cdot10^3$} &  \codeandmath{\num{3,4e3}}  \\
+    \codeandmath{$F=10,0e3 N$}   &  \codeandmath{$F=\SI{10,0e3}{N}$}  \\ 
+    \codeandmath{$1+i$}          &  \codeandmath{\num{1+i}}  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+Ele também deixa lidar com incertezas mais fácil:
+\begin{table}[h]
+\centering
+\begin{tabular}{cc}
+\toprule
+    Código & Resultado \\ \midrule
+    \codeandmath{\num{5.3(2)}} \\  
+    \codeandmath{\SI{5.3+-2e-3}{kg}} \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Tabelas podem ser feitas de maneira mais fácil utilizando o site \href{https://www.tablesgenerator.com/}{tablesgenerator}.
+
+\subsection{Figuras} 
+
+Os comandos \verb$\addFigure{}{}{}$ e \verb$\addSubfigure{}{}{}$ são utilizados para simplificar o código e uniformizar o estilo de referenciação de figuras. Os seus 3 parâmetros são, respectivamente: tamanho horizontal, caminho da figura e legenda. O comando \verb$\Cref{}$ referencia a figura por seu nome extenso.
+Por exemplo, o código
+\begin{verbatim}
+    \addFigure{0.3}{PCBDimensoes}
+    {Dimensões maiores de uma placa de circuito impresso.}
+    
+    A \Cref{fig:PCBDimensoes} mostra as dimensões
+    maiores de uma placa de circuito impresso.
+\end{verbatim}
+resulta em 
+\addFigure{0.3}{PCBDimensoes}
+{Dimensões maiores de uma placa de circuito impresso.}
+    
+A \Cref{fig:PCBDimensoes} mostra as dimensões
+maiores de uma placa de circuito impresso.
+
+A figura nem sempre caberá na página, então o texto seguirá e ela aparecerá em algum lugar apropriado. 
+
+Para fazer sub-figuras, é necessário criar um ambiente de figura externo. Ao escrever-se \\ \verb$\begin{figure}$ o Overleaf irá criar o ambiente inteiro. Você deve apagar a linha que contém \verb$\includegraphics$. Segue um exemplo:
+{\small
+\begin{verbatim}
+    \begin{figure}
+        \addSubfigure{0.4}{RodaReacaoDimensoes}{Dimensões}
+        \addSubfigure{0.4}{RodaReacaoIso}{Vista isométrica}
+        \addSubfigure{0.7}{template/zenith-faixa}{Faixa Zenith}
+        \caption{Roda de reação com suas dimensões (a) e sua vista 
+        isométrica (b). Em (c), a faixa preta com o logo do Zenith}
+        \label{fig:RodaEFaixa}
+    \end{figure}
+\end{verbatim}
+}
+
+\begin{figure}
+    \addSubfigure{0.4}{RodaReacaoDimensoes}{Dimensões}
+    \addSubfigure{0.4}{RodaReacaoIso}{Vista isométrica}
+    \addSubfigure{0.7}{template/zenith-faixa}{Faixa Zenith}
+    \caption{Roda de reação com suas dimensões (a) e sua vista isométrica (b). Em (c), a faixa preta com o logo do Zenith}
+    \label{fig:RodaEFaixa}
+\end{figure}
+
+
+É possível referenciar tanto a figura como um todo: \\
+\verb$\Cref{fig:RodaEFaixa}$: \Cref{fig:RodaEFaixa}, como as sub-figuras, utilizando os nomes dos arquivos:\\ \verb$\Cref{fig:template/zenith-faixa}$ \Cref{fig:template/zenith-faixa}.
+
+\subsection{Equações}
+
+Podemos usar o pacote \verb$physics$ para escrever equações de maneira mais fácil.
+{\small
+\begin{verbatim}
+    \begin{equation}
+      \dv{t}\left[ \pdv{T}{\dot{q}}\right] - \pdv{T}{q} + \pdv{V}{q} = 0 .
+    \end{equation}
+\end{verbatim}
+}
+\begin{equation}
+    \dv{t}\left[ \pdv{T}{\dot{q}}\right] - \pdv{T}{q} + \pdv{V}{q} = 0 .
+\end{equation}
+
+Se precisarmos quebrar uma linha ou escrever várias equações de uma vez, podemos utilizar o ambiente \verb$aligned$ para alinhar símbolos parecidos (como alinhar todas as igualdades).
+{\small
+\begin{verbatim}
+\begin{equation}
+    \begin{aligned}
+    V &= 2\left[\tfrac{1}{2}kx^2\right] + 
+    2\left[\tfrac{1}{2}ky^2\right] + 
+    4\left[\tfrac{1}{2}k\left(\tfrac{\sqrt{2}}{2}z\right)^2\right] 
+    + Mg(1-\cos\theta)+\\
+    &+\tfrac{1}{2}mgx(\cos\theta+\sin\theta)+
+    \tfrac{1}{2}mgy(\cos\theta+\sin\theta) +
+    \tfrac{\sqrt{2}}{2}mgz(\cos\theta-\sin\theta) .
+    \end{aligned}
+\end{equation}
+\end{verbatim}
+}
+\begin{equation}
+    \begin{aligned}
+    V &= 2\left[\tfrac{1}{2}kx^2\right] + 
+    2\left[\tfrac{1}{2}ky^2\right] +
+    4\left[\tfrac{1}{2}k\left(\tfrac{\sqrt{2}}{2}z\right)^2\right] 
+    + Mg(1-\cos\theta)+\\
+    &+\tfrac{1}{2}mgx(\cos\theta+\sin\theta)+
+    \tfrac{1}{2}mgy(\cos\theta+\sin\theta) + 
+    \tfrac{\sqrt{2}}{2}mgz(\cos\theta-\sin\theta) .
+    \end{aligned}
+\end{equation}
+
+Os caracteres que estiverem próximos ao símbolo \& serão alinhados e a linha apenas quebra em \verb$\\$, de modo que a organização em linhas no código fonte pode ser utilizada como achar melhor.
+
+Podemos, também, criar um label para equações importantes, de modo que podemos referenciá-la com o comando \verb$\eqref{}$: Em \eqref{eq:EquacoesDeMovimento}, temos outro exemplo de equações alinhadas. São boas práticas começar todos os labels de equação com ``\verb$eq:$''.
+\begin{equation}\label{eq:EquacoesDeMovimento}
+    \begin{aligned}
+        m\Ddot{x}+2kx+\tfrac{1}{2}mg(1+\theta) &= 0 \\
+        m\Ddot{y}+2ky+\tfrac{1}{2}mg(1+\theta) &= 0 \\
+        m\Ddot{z}+2kx+\tfrac{\sqrt{2}}{2}mg(1-\theta) &= 0 \\
+        J\Ddot{\theta}+2Mg\theta+\tfrac{1}{2}mg(1-\theta) &= 0 
+    \end{aligned}
+\end{equation}
+
+\subsection{Outras coisas}
+Para testar apenas a formatação de seu documento, pode-se usar um gerador de texto, como o \verb$\lipsum$: \\
+\lipsum[1-2]
+
+\section{Manutenção}\label{sec:Manutencao}
+
+Para fazer atualizações nos templates -- e, por conseguinte, em \verb$r/preamble.tex$ --, o ideal é que este projeto seja duplicado e as alterações sejam feitas e testadas na cópia. As alterações não podem comprometer a compilação de nenhum dos documentos testados. Caso não haja problemas, o código pode ser copiado para este projeto e o projeto do template deve ser atualizado (clicando no botão Refresh). Ao criar uma nova versão, atualize o valor de \verb$\data{}$ com a data da atualização por extenso.
+
+\end{document}

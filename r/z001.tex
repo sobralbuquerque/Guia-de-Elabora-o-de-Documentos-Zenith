@@ -1,0 +1,178 @@
+\section{Introdução}
+
+O desenvolvimento de Hardware para sistemas embarcados é um processo longo e complexo, que demanda de muita atenção e cuidado desde de o início do projeto até a sua manufatura  e compra de componentes. Tal desenvolvimento conta com diversas etapas diferentes que estão diretamente relacionadas ao correto funcionamento e qualidade do hardware desenvolvido.
+
+A fim de facilitar e padronizar o processo de desenvolvimento, diminuir a incidência de erros, ou de falhas em um projeto, foi criado um Protocolo de Desenvolvimento de Hardware que deverá ser seguido pelos membros do Departamento de Sistemas Embarcados.
+
+\section{Etapas a serem seguidas durante o projeto}
+
+Durante o desenvolvimento de um projeto de hardware existem alguns processos que são muito minuciosos, e necessitam de etapas específicas para o serem realizados. Dessa maneira, foram listados os principais processos do desenvolvimento de projeto de hardware adotado no grupo extracurricular Zenith Aerospace.
+
+\subsection{Levantamento de Requisitos}
+
+Requisitos de um projeto são basicamente condições que devem ser atendidas para satisfazer uma necessidade  do projeto. O processo de levantamento de requisitos é o primeiro passo a ser executado ao se desenvolver qualquer  projeto de engenharia, pois nele serão levantados, analisado e registrados todos os requisitos que seu projeto deve atender.  Ao se desenvolver esse processo é necessário muita atenção e diálogo, pois é importante  certificar-se de que não foi esquecido nenhum detalhe  que seja relevante ao projeto, pois isso pode implicar em uma complicação ao decorrer do desenvolvimento.
+
+Dessa maneira, ao  se realizar esse procedimento é necessário levar em conta alguns tópicos que foram listados a seguir. Vale salientar que estes são apenas alguns tópicos, pois ao levantar requisitos de projeto é necessário pensar literalmente em tudo.
+
+\begin{itemize}
+    \item \textbf{Condições ambientais:}
+    essas condições definem grande parte dos requisitos do sistema, como a temperatura de operação, ou nível de radiação, umidade, vibração  que o hardware estará exposto.
+    \item \textbf{Existência de integração com demais sistemas:}
+    Se existe integração com outros sistemas é necessário ver a arquitetura que estes devem ser construídas, quais protocolos de comunicação devem ser adotados, por exemplo.
+    \item \textbf{Possibilidades de expansões futuras:} 
+    É necessário pensar em condições que não necessitam ser atendidas pelo projeto neste momento, mas que poderão ser necessárias posteriormente.
+    \item \textbf{Levantamento de Custos:}
+     no desenvolvimento do projeto sempre é necessário se pensar nos custos, pensando em tornar o projeto o mais barato possível. 
+\end{itemize}
+
+A fim de exemplificar esse processo, vamos levar em conta o levantamento de requisitos da G-Board, hardware  para sondas estratosféricas utilizado no grupo Zenith EESC-USP. Um requisito deste projeto é realizar a medição de temperaturas internas e externas a sonda. Dessa forma as condições ambientais são extremamente importantes,  sendo definido uma faixa de operação para os sensores de temperatura  de acordo com o ambiente estratosférico.  Pensando em futuras expansões, é interessante a utilização de termopares para a medição da temperatura de experimentos biológicos que possam ser embarcados na sonda. Além disso, ao procurar por um sensor que atenda a todas estas características, alguns tem seu preço bem elevado, sendo necessário procurar por outros que sejam mais viáveis.
+
+\subsection{Avaliação de Novas Possibilidades}
+
+Muitas vezes ao longo da execução de um projeto é necessário realizar alterações significativas no que havia sido projetado. Isso grande parte das vezes acontece para acrescentar algo que ainda não havia sido pensado, ou que ainda não se mostrava necessário. 
+
+Dessa forma ao se desenvolver um projeto de Hardware, é necessário se pensar além dos requisitos do projeto, pensando em futuras necessidades as quais seu hardware possa atender. Um exemplo disso, também relacionado ao desenvolvimento do projeto da G-Board, é a utilização de um barramento CAN na placa. Esse não era um requisito do sistema, mas cria muitas possibilidades de expansão para a utilização de novos sensores, ou a comunicação com outros sistemas.
+
+\subsection{Definição dos Componentes}
+
+Após a definição dos requisitos do projeto, é necessário procurar por componentes e circuitos que sejam capazes de atender a esses requisitos. Essa é uma das etapas de mais complexidade durante o desenvolvimento de um projeto de hardware, pois existem uma infinidade de componentes designados para a mesma tarefa, sendo difícil escolher um dentre muitos que têm a mesma função.  Além disso, a escolha muitas vezes se torna  difícil pelo fato da falta de conhecimento prévio a respeito dos componentes e fabricantes  para saber qual escolher.
+
+Então, para conseguir encontrar um componente adequado ao seu projeto é necessário realizar uma análise extensa e aprofundada do seu datasheet. O datasheet é um documento que contém todas as informações do componente, como as suas características elétricas e distribuição dos pinos por exemplo. Dessa maneira, alguns dos principais tópicos a serem analisados na escolha de um componente foram listados a seguir. 
+
+\begin{itemize}
+    \item \textbf{Condições Ambientais:}
+    As condições ambientais às quais seu componente será submetido são um dos fatores mais importantes na sua escolha. É preciso ter total certeza de que seu componente vai operar corretamente no ambiente ao qual seu projeto estará exposto.  Um exemplo desse fator é a faixa de temperatura a qual seu componente opera, e a exposição a radiação, fatores que foram levados em conta no desenvolvimento na escolha dos componentes das placas das sondas estratosféricas.
+    \item \textbf{Tensão de alimentação e de  nível lógico:}
+    Antes de escolher qualquer componente ativo de um projeto, é necessário saber sua tensão de alimentação e principalmente nível lógico. Isso é de extrema importância pois se houver incompatibilidade entre os níveis lógicos de seus componentes,  seu projeto  não irá  funcionar e os componentes vão ser danificados.
+    \item \textbf{Protocolos de Comunicação:}
+    Principalmente na escolha de sensores, é necessário se atentar qual protocolo de comunicação  utilizado pelo sensor e se ele está disponível nos sistemas responsável pela leitura de seus dados.
+    \item \textbf{Frequência de Amostragem:}
+    É muito comum que sensores tenham uma frequência de amostragem já determinada. Dependendo da sua aplicação, é necessário verificar se essa frequência  de amostragem é suficiente.
+    \item \textbf{Package:}
+    Sem dúvidas a escolha do package do componente é também uma das etapas mais importantes do desenvolvimento do projeto. Ao se escolher o package, precisamos levar em conta vários fatores, como seu tamanho, sua escala de integração com os demais componentes (principalmente na escolha de microcontroladores) e as condições ambientais  a qual seu projeto estará submetido por exemplo.
+    \item \textbf{Processo de Solda:}
+    O processo pelo qual seu componente será soldado em sua placa deve ser levado em conta. Muitas vezes esse componente necessitará ser soldado na mão, fazendo com que certos tipos de solda se tornem muito complexas ou praticamente impossíveis. Exemplos disso são componentes que usam tecnologia BGA onde é praticamente impossível ser soldado sem o equipamento específico e muita experiência.
+    \item \textbf{Consumo Energético:}
+    Para que seu projeto como um todo tenha uma boa eficiência energética é necessário se atentar ao consumo de cada componentes, buscando sempre escolher o que melhor disponha da relação consumo e eficiência. Um exemplo disso é a utilização de conversores DC-DC do tipo step-down no lugar de reguladores de tensão.
+    \item \textbf{Dissipação de Calor:}
+    Esse é um fator a ser levado em conta na escolha dos componentes, principalmente em projetos que necessitam de componentes com atuação mecânica ou alto poder de processamento. Além disso em alguns casos a  dissipação de calor pode estar relacionada a baixa eficiência do componente, como reguladores de tensão por exemplo.
+    \item \textbf{Preço:}
+    Sendo este muitas vezes um fator limitante de um projeto, o preço de cada componente deve ser sempre levado em conta. Muitas vezes é possível encontrar algum componente similar de outra fabricante com um preço mais em conta. Além disso na maioria das vezes é necessário realizar a compra dos componentes em lojas fora do Brasil, elevando os custos com as altas taxas de importação.
+    \item \textbf{Durabilidade:}
+    Esse fator deve ser levado em conta principalmente em projetos em que a manutenção será muito complexa ou até mesmo impossível, como um satélite por exemplo. Dessa forma é importante se conhecer a vida útil do componente. 
+    \item \textbf{Tempo de Produção:}
+    O tempo de produção é o tempo pela qual a fabricante ainda irá produzir o componente. Isso é importante a fim de que seu projeto não utilize componentes obsoletos, ou que já estão perto disso, dificultando assim uma manutenção futura.
+\end{itemize}
+
+Esses são apenas alguns dos fatores que precisam ser levados em conta no escolha de um componente. Esse processo se mostra com uma complexidade tão alta, a ponto de estarem sendo realizadas pesquisas com a utilização de inteligências artificiais para essa tarefa.  Portanto a escolha dos componentes deve ser processo mais trabalhoso e consequentemente demorado de seu projeto, pois este envolve muita pesquisa e muitos detalhes a serem levados em conta.
+
+\subsection{Análise da Viabilidade Econômica }
+
+Antes do desenvolvimento do projeto é necessário levar em conta sua viabilidade econômica, pois muitas vezes um projeto é excelente, mas seu custo acaba por deixá-lo inviável. Dessa maneira é necessário realizar um levantamento aprofundado de todos os custos do projeto, levando em conta alguns dos fatores listados abaixo.
+
+\begin{itemize}
+    \item \textbf{Custo Máximo do Projeto:}
+    É necessário ter em mente uma faixa de valor que pode ser gasta no projeto, fazendo com que este tenha que se adaptar a estas condições.
+    \item \textbf{Manufatura:}
+    O processo de manufatura precisa ser levado em conta, pois este em alguns casos se torna excessivamente caro. Um exemplo é a utilização de três camadas no desenvolvimento de uma placa, processo que quadruplica de preço em relação a outros processos.
+    \item \textbf{Compra dos Componentes:}
+    Muitas vezes nem todos os componentes são encontrados em uma única loja, fazendo com que seja necessário realizar mais de uma compra e encarecendo os preços de fretes por exemplo.
+    \item \textbf{Taxas de Importação:}
+    Ao realizar a importação de qualquer produto, como componentes, ou até mesmo as próprias placas, é necessário levar em conta os impostos e taxas de importação que muitas vezes chegam a dobrar o valor final do produto.
+\end{itemize}
+
+Dessa forma é necessário que se faça todo este levantamento, fazendo realmente um orçamento do custo final do projeto com uma boa exatidão para que não ocorram surpresas em relação ao custo durante o desenvolvimento do projeto. Deverá ser utilizado uma planilha padrão sobre custos de projeto, organizando todas essas informações, especificando muito bem os gastos que posteriormente será entregue ao setor financeiro.
+
+\subsection{Desenvolvimento do Esquemático}
+
+Após a realização de todos os etapas descritos anteriormente chega então o momento do desenvolvimento do esquemático. Esse é o processo mais importante do desenvolvimento de  qualquer Hardware, pois nele é que estarão representados todos os componentes e conexão entre eles. O esquemático é desenvolvido em algum software para o desenvolvimento de Hardware. 
+
+Dentre tais softwares destacam-se o Altium, Eagle, Proteus e KiCad. Atualmente o grupo Zenith utiliza o Eagle como software padrão para o desenvolvimento de seus Hardwares.
+Devido a grande complexidade dessa etapa é necessário que se tenha absoluta certeza de que o projeto está atendendo a todos os requisitos e de que não existe nenhuma conexão equivocada entre os componentes. Dessa maneira, alguns tópicos relevantes a esta etapa foram listados.
+
+\begin{itemize}
+    \item \textbf{Footprint do Componente:}
+    Antes de adicionar algum componente ao seu esquemático, principalmente no caso de componentes que foram adicionados por bibliotecas não nativas do software, é necessário conferir se o footprint é o mesmo apresentado pelo datasheet do componente. 
+    \item \textbf{Função dos pinos de um componente:}
+    É necessário ter total certeza sobre a função de cada pino do componente e saber exatamente onde este deve ser conectado.  Essas informações são todas encontradas no datasheet dos componentes.
+    \item \textbf{Organização do Esquemático:}
+    A organização do esquemático do projeto é essencial para seu bom entendimento. Um bom esquemático é aquele que está dividido em blocos separados, onde cada um tem uma função específica. Também é  importante adicionar comentários e observações relevantes a cada parte do projeto, facilitando o entendimento deste por terceiros. Utiliza-se também de frames contendendo título, versão e autor do projeto, a fim de manter a organização quando se lida com vários projetos ao mesmo tempo.
+    \item \textbf{Ferramentas para verificação de erros:}
+    Os software para desenvolvimento de hardware contam com ferramentas úteis na procura por possíveis erros no esquemático. Essas ferramentas são capazes de informações sobre conexões equivocadas, curtos-circuitos dentre outros.
+\end{itemize}
+
+Ao fim do desenvolvimento do esquemático, além da utilização das ferramentas para verificação de erros, também é essencial que este seja extensivamente conferido por outro desenvolvedor e que sejam feitas simulações, seguindo o protocolo de testes e verificações, a fim de que qualquer erro, por menor que seja, não passe despercebido. É essencial que erros no esquemático sejam corrigidos antes do desenvolvimento do layout da placa, pois um mudança em um layout finalizado é muito complicada.
+
+
+\subsection{Simulação}
+
+A simulação de um projeto é uma parte essencial do seu desenvolvimento. Através dela é possível verificar se existem falhas no seu esquemático antes de desenvolver o layout de sua placa, além de ser possível realizar a análise de desempenhos e  otimizações. Dessa forma erros que seriam fatais ao funcionamento do projeto e que talvez só fossem encontrados após a manufatura do projeto podem ser corrigidos. Esse processo implica em resultados positivos no projetos, pois validam seu esquemático antes da manufatura, evitando prejuízos. Essas simulações podem ser desenvolvidas em softwares próprios, ou em alguns dos softwares para desenvolvimento de Hardware, como o Proteus e o Altium.
+
+\subsection{Levantamento do Consumo Energético}
+
+O consumo energético é algo de extrema importância a ser levado em conta durante o desenvolvimento do  projeto, buscando que este seja o mais otimizado possível, aumentando assim sua autonomia. Dessa forma, é importante obter uma boa aproximação para o consumo energético do projeto em função do tempo. Para isso, é possível levantar o consumo de cada componente do projeto a partir das informações encontradas no seu datasheet e fazer um balanço com todos os componentes, ou utilizar a simulação em softwares como o Altium a fim de se obter uma estimativa mais aproximada. 
+
+\subsection{Levantamento da Dissipação de Calor}
+
+Durante o desenvolvimento do projeto, a dissipação de calor é um fator que deve ter atenção especial, pois este além de ter extrema importância ao próprio projeto, também é relevante a outros sistemas, como no caso do dimensionamento de um isolamento térmico por exemplo.  Dessa maneira é necessário se obter com uma boa aproximação qual será a dissipação de calor total de seu projeto, levando em conta os pontos onde ela mais se aquece e  quais os componentes que mais estão dissipando calor por exemplo. A partir de softwares, é possível simular a dissipação de calor em uma placa depois que o layout esteja pronto, mas antes disso, para uma estimativa, é possível fazer um levantamento a partir da potência dissipada por componente, obtendo uma boa aproximação.
+
+\subsection{Desenvolvimento do Layout}
+
+
+O desenvolvimento do layout é um dos últimos passos a ser realizado durante o desenvolvimento do projeto. Antes dessa etapa ser iniciada, é necessário certificar-se de que todos os outras foram realizadas de maneira satisfatória, dando ênfase ao desenvolvimento do esquemático e as simulações realizadas, pois é muito trabalhoso realizar alterações significativas no layout de placa após sua finalização. Dessa maneira alguns dos principais tópicos a serem levados em conta em um layout foram listados a seguir. É importante salientar que essas são apenas alguns tópicos, sendo que um aprofundamento destes estarão disponíveis em outro documento.
+
+\begin{itemize}
+    \item \textbf{Posicionamento dos Componentes:}
+    O desenvolvimento de um bom layout começa com um posicionamento adequado dos componentes, levando em conta diversos parâmetros, como as conexões entre componentes e a dissipação de calor, por exemplo.
+    \item \textbf{Largura mínima das trilhas:}
+    As empresas de manufatura de Hardware especificam um largura mínima a qual conseguem realizar a manufatura. O padrão utilizado normalmente é o de 6mil (milésimo de polegado) que corresponde a \SI{0.1524}{mm}. desta forma, é possível configurar nas  design rules do software utilizado qual este tamanho mínimo. Vale salientar que existem tamanho menores, mas que encarecem de duas a três vezes os custos de manufatura. Além do tamanho mínimo é importante que as trilhas da placa sejam dimensionadas de acordo com a corrente que irá fluir por elas, pois a utilização de uma trilha mal dimensionada pode fazer com provocar um superaquecimento e  rompimento da trilha.
+    \item \textbf{Ângulo de curvatura em trilhas:}
+    Principalmente em placas que trabalham com muitos sinais, é necessário se atentar aos ângulos das trilhas, fazendo com que esses sejam os mais suaves possíveis, já que em alguns casos o ângulo da trilha é capaz de atenuar o sinal a ponto de interferir no funcionamento do projeto.
+    \item \textbf{Plano Ground:}
+    É importânte a utilização de um plano ground no seu layout, além de facilitar o desenvolvimento do mesmo por diminuir trilhas de gnd, esse plano cria um isolamento eletromagnético na sua placa, diminuindo a interferência em sinais. Comumente, separa-se o ground em um ground para potência e outro para sinais.
+    \item \textbf{Silk Screen:}
+    Um silkscreen bem desenvolvido é essencial ao projeto, pois além do aspecto visual, também facilita a solda dos componentes quando realizada por terceiros.
+\end{itemize}
+
+\subsection{Documentação e Aprovação do Projeto}
+
+
+A fim de registrar todo o desenvolvimento do projeto, deverá ser elaborado um documento que contenha uma descrição elaborada de cada etapa desenvolvida no projeto.  É ideal que o desenvolvimento deste documento caminhe juntamente com as etapas do projeto, registrando detalhadamente todos os requisitos, os componentes utilizados, custos do projeto, arquivos do esquemático e board, simulações, etc. 
+
+Desta maneira o projeto só será manufaturado após a apresentação e aprovação do projeto pelo coordenador do Departamento de Sistemas Embarcados. Ao longo do desenvolvimento, algumas apresentações periódicas deverão ser desenvolvidas ao longo das reuniões semanais. Este processo tem por finalidade aproximar o grupo da realidade empresarial, além de evitar prejuízos provenientes na manufatura de um projeto não funcional.
+
+\subsection{Processo de Manufatura}
+
+ Este é um dos processos finais do desenvolvimento do projeto de hardware, por isso é essencial ter a garantia de que todas as outras etapas foram desenvolvidas corretamente. Desta forma este processo só será iniciado após a aprovação da documentação do projeto pelo coordenador do Departamento de Sistemas Embarcados. 
+
+
+A manufatura do projeto consiste basicamente em duas etapas, sendo a manufatura da placa, processo terceirizado realizado geralmente em empresas chinesas, atualmente na PCB Way, e no processo de solda dos componentes, geralmente realizados por membros do grupo com alguma experiência na área. Desta maneira ao enviar o projeto para a empresa responsável pela manufatura, devem ser tomados alguns cuidados:
+
+\begin{itemize}
+    \item \textbf{Verificação dos arquivos Gerber:}
+    Esses são os arquivos que são enviados para  a empresa. A exportar estes arquivos do seu software, é sempre necessário conferir se estão coerentes com o projeto. Além disso, as empresas de manufatura disponibilizam um preview da sua placa baseado no seu gerber, então é possível conferir se está tudo correto.
+    \item \textbf{Tecnologias utilizadas na manufatura:}
+    É importante verificar quais as tecnologias serão utilizadas na manufatura, definindo assim a distância mínima entre trilhas, espessura do cobre e materiais utilizados, por exemplo
+\end{itemize}
+
+Levando em conta o processo de solda dos componentes, existem etapas  minuciosas a serem desenvolvidas que requerem um pouco de prática dependendo dos componentes utilizados, principalmente no caso de microcontroladores ou circuitos integrados  SMD com muitos pinos. Para isso desenvolvem-se técnicas para solda que serão abordadas em outro documento.
+
+\subsection{Realização de Testes e Validação do Projeto}
+
+Após o processo de manufatura do projeto estar completo, é necessário que sejam realizados testes a fim de se ter uma validação de que o projeto é funcional. Desta forma podem ser realizados diversos testes com finalidades diferentes, como testes ambientais que certificam-se de que o projeto será  funcional para as condições a qual foi projetado. No caso de sistemas embarcados, é necessário realizar a integração entre o hardware e o software do projeto pois é praticamente impossível testá-los  separadamente e ter certeza de que seu projeto é funcional.
+
+Partindo para caso em que seu hardware não funcionou como o esperado, existem alguns testes que podem ser realizados a fim de se encontrar um possível erro. Este é um tópico extenso,  que é adquirido com a prática, sendo assim apenas alguns dos mais relevantes foram listados.
+
+\begin{itemize}
+    \item \textbf{Posicionamento dos componentes:}
+    Se os passos descritos foram seguidos e seu projeto se mostrou funcional durante as simulações, algum erro pode ter ocorrido ou na manufatura ou no posicionamento de algum componente, fato que é comum. Desta forma, é necessário checar com atenção as marcações que indicam a orientação dos componentes.
+    \item \textbf{Solda fria ou Curto Circuito:}
+    Ao realizar a solda de componentes muito pequenos, pode ocorrer de em algum ponto haver excesso de solda, provocando um curto-circuito. Neste caso é aconselhável a utilização de uma malha de solda, ou até  mesmo retirar o componente e realizar a solda novamente. Além disso, podem ter ocorrido soldas frias (quando estão opacas) ou com uma pouca quantidade de estanho, sendo necessário refazê-las.
+
+\end{itemize}
+
+Desta maneira, é necessário despender um bom tempo na etapa de testes e validação do seu projeto a  fim de que estes comprovem a confiabilidade e segurança do seu projeto.
+
+\section{Conclusão} 
+
+Ao decorrer do documento nota-se quão extenso e complexo é o processo para desenvolvimento de um projeto de Hardware. Dessa forma, conclui-se como é importante seguir uma linha de desenvolvimento pré determinada a fim de padronizar esse processo. Novamente, vale salientar que esse documento é um resumo de todo o processo e contempla superficialmente cada processo do protocolo. Assim espera-se que esse protocolo seja seguido pelos membros do Departamento de Sistemas Embarcados e que este traga resultados positivos, dinamizando os processos e diminuindo a tempo de desenvolvimento de futuros projetos

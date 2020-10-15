@@ -1,0 +1,124 @@
+% !TEX program = xelatex
+\documentclass[12pt,brazilian]{article}
+\input{r/preamble.tex}
+\usepackage{epsf}
+\usepackage{floatflt}
+\usepackage{float}
+\usepackage{accents}
+\usepackage{multicol}
+\usepackage{upgreek}
+% Comando para derivadas temporais
+\newcommand*{\dt}[1]{
+    \dv{#1}{t}
+    }
+\newcommand*{\ddt}[1]{
+    \dv[2]{#1}{t}
+    }
+
+
+\tipo{Proposta de Projeto}
+\titulo{Caracterização de Motores}
+\nucleo{Núcleo de Engenharia}
+
+
+\date{\today}
+
+
+
+\begin{document}
+\setTema
+\geraTituloProjeto
+\sumario
+
+% DOCUMENTO COMEÇA AQUI
+
+\section{Descrição do Projeto}
+
+\lipsum[3]
+
+\section{Modelo do Motor}
+
+\noindent
+O circuito correspondente do motor é conforme a \Cref{fig:circ_motor}.
+
+\addFigure{0.4}{circ_motor}{Modelo do Motor}
+
+Equação de Tensão-Velocidade Angular no motor:
+\begin{equation}
+    V_M(t) = K_R\cdot\omega(t)=K_R \dt{\theta(t)}  .
+\end{equation}
+Lei das malhas no circuito:
+\begin{equation*}
+    \sum V = 0 \Rightarrow V(t) = V_R(t) + V_L(t) + V_M(t)
+\end{equation*}
+\begin{equation}\label{eq:EquacaoDiferencialTensao}
+    V(t) - R i(t) - L\dt{i(t)} - K_R\dt{\theta(t)} = 0 .
+\end{equation}
+Torque gerado pelo motor:
+\begin{equation}
+    \uptau(t) = K_M\cdot i(t) .
+\end{equation}
+Conservação de momento angular:
+\begin{equation*}
+    \dt{\vec{L}} = J\vec{\alpha}= \sum \vec{\uptau} \Rightarrow J\ddt{\theta(t)} = \uptau(t) -b \dt{\theta(t)}
+\end{equation*}
+\begin{equation}\label{eq:EquacaoDiferencialTorque}
+    J\ddt{\theta(t)} = K_M i(t) -b \dt{\theta(t)},
+\end{equation}
+onde $b$ é um fator de atrito.
+
+
+\section{Equação de Estado Sistema}
+
+O motor elétrico pode, então, ser definido pelas seguintes equações diferenciais:
+\begin{equation}
+\arraycolsep=1.4pt\def\arraystretch{2.2}
+\left\{\begin{array}{l}
+{ \dv{t}\theta(t)=\omega(t)} \\ 
+{J \dv{t}\omega(t)= K_M i(t)} - b \omega(t) \\ 
+{L \dv{t}i(t)+R i(t)+K_R\omega(t)=V(t)} 
+\end{array}\right.
+\end{equation}
+
+Podemos, então, escrever na forma matricial
+
+\begin{equation}
+    \dv{t} \mqty[\theta(t) \\ \omega(t) \\ i(t)]=
+    \mqty[ 0 & 1 & 0 \\ 0 & -b/J & K_M/J \\ 0 & -K_R/L & -R/L] 
+    \mqty[\theta(t) \\ \omega(t) \\ i(t)]
+    + \mqty[0\\0\\\frac{1}{L}]
+    V(t)
+\end{equation}
+
+
+
+
+\section{Levantamento de Requisitos}
+ Os requisitos do sistemas foram levantados pensando-se na caracterização de hélices e de motores do tipo brushed e brushless.
+ Pensando-se na caracterização de motores, os seguintes requisitos foram levantados:
+ \begin{itemize}
+    \item Resistência interna do motor a ser caracterizado
+    \item Indutância do motor a ser caracterizado
+    \item Corrente em ambos os motores
+    \item Tensão no motor conhecido
+    \item Tempo de parada do motor a ser caracterizado
+    \item Medição de corrente de Stoll
+    \item Fonte de tensão com saída ajustável por software para motor a ser caracterizado
+    \item Velocidade angular dos motores
+    \item Posição angular
+    \item Acoplador entre dois eixos
+    \item Percas no motor elétricos
+ \end{itemize}
+ 
+ Já para a caracterização de hélices, os requisitos levantados foram os seguintes:
+ \begin{itemize}
+     \item Dinamômetro para medição da força da hélice
+     \item Velocidade angular da hélice
+     \item Velocidade de entrada e de saída do vento
+     \item Pressão de entrada e de saída do vento
+     \item Controle de velocidade da hélice
+     \item Estrutura aerodinâmica 
+     \item Trilho com baixo coeficiente de atrito 
+     \item Estrutura resistente a vibrações
+ \end{itemize}
+\end{document}

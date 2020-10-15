@@ -1,0 +1,29 @@
+% !TEX program = xelatex
+\documentclass[brazilian, 12pt, oneside, a4paper]{article}
+\input{r/preamble.tex} % Arquivo com pacotes e comandos
+
+% \drafttrue % Modo draft, imagens de estilização não são carregadas.
+
+% comandos com primeira letra minúscula são opcionais
+
+\protocolo{Z-001} % número/código
+\titulo{Protocolo para Desenvolvimento de Hardware} % nome
+% \nucleo{Núcleo de Engenharia} % apenas definir se envolver mais de um departamento
+\departamento{Departamento de Sistemas Embarcados}   
+
+\data{19/04/2020} % "última atualização"  
+\Criacao{02/11/2019} % "Data de criação"
+
+\Resumo{O documento prevê a criação de um protocolo para o desenvolvimento de Hardware a ser adotado pelo grupo. Este tem por objetivo  estabelecer um padrão nas etapas a serem adotados do início ao fim de um projeto, visando a padronização e prevenção de erros em um projeto.}
+
+
+\begin{document}
+\setFaixa
+\geraTituloProtocolo
+\sumario
+
+%  DOCUMENTO COMEÇA AQUI
+
+\input{r/z001.tex}
+
+\end{document}

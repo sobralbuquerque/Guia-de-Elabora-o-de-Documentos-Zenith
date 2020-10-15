@@ -1,0 +1,74 @@
+% !TEX program = xelatex
+\documentclass[brazilian, 12pt, oneside, a4paper]{article}
+\input{r\preamble.tex} % Arquivo com pacotes e comandos
+
+% \drafttrue % Modo draft, imagens de estilização não são carregadas.
+
+
+\titulo{Projeto Novos Membros}
+% \nucleo{Núcleo de Engenharia}
+\departamento{Departamento de Estruturas}       
+
+\data{\today} % Apagar \today caso queira omitir data. (comentar esta linha não funciona)
+
+\begin{document}
+\setFaixa
+\geraTitulo
+
+%  DOCUMENTO COMEÇA AQUI
+
+\section*{Objetivo} % asterisco em \section* para não numerar seções.
+
+Realização do desenho de um 0projeto de CubeSat para introdução dos concei-tos técnicos e organizacionais do grupo Zenith e do Departamento de Estruturas para os novos membros. No final do período deverá ser apresentado um protótipo funcional seguindo as especificações apresentadas neste documento.
+
+\section*{Especificações}
+
+\begin{enumerate}
+    \item O protótipo será de um CubeSat 1U compatível com a \href{https://static1.squarespace.com/static/5418c831e4b0fa4ecac1bacd/t/56e9b62337013b6c063a655a/1458157095454/cds_rev13_final2.pdf}{CubeSat Design Specification Rev. 13};
+    \item Operacionalidade de \SIrange{-10}{50}{\celsius}; % Pacote siunitx para valores numéricos padronizados.
+    \item Carregamento por painéis solares;
+    \item Estrutura impressa em 3D e desenhada pelo \textit{software} SOLIDWORKS.
+\end{enumerate}
+
+\section*{Componentes}
+
+A fim de realizar as missões do CubeSat, são necessários alguns componentes dentro da estrutura e eles devem estar dispostos de maneira segura. Os componentes que devem estar no CubeSat são:
+\begin{itemize}[label=--]
+    \item 3 pilhas Samsung INR18650-25R;
+    \item 1 roda de reação;
+    \item 3 Placas PCBs;
+    \item Painéis solares;
+    \item 1 câmera RaspCam (deverá estar apontando para baixo);
+    \item 1 Raspberry Pi Zero
+\end{itemize}
+
+\subsection*{Roda de Reação}
+A roda de reação utilizada é feita de nylon torneado.
+\addFigure{0.6}{RodaReacaoIso}{} % formato {escala horizontal}{NomeArquivo}{Legenda}, a referencia é sempre fig:NomeArquivo
+
+
+Ela tem \SI{78.60}{mm} de diâmetro externo e \SI{6.60}{mm} de espessura. Possui encaixe no motor, que deve ser preso na estrutura.
+\addFigure{0.6}{RodaReacaoDimensoes}{}
+
+\subsection*{Placas de Circuito Impresso}
+Serão utilizadas duas PCBs. As dimensões serão conforme a \Cref{fig:PCBDimensoes}.
+\addFigure{0.6}{PCBDimensoes}{}
+
+Elas devem encaixar na Raspberry e a distância vertical mínima das PCBs e qualquer outro componente é de \SI{9}{mm}.
+
+
+\section*{Informações}
+
+O Departamento de Astronáutica precisa simular o voo e, para isso, é necessária uma estimativa da massa do satélite inteiro (com todos os componentes). Além disso, para o projeto do circuito de controle de atitude, o Departamento de Embarcados precisa saber o momento de inércia do satélite (no centro, em relação à vertical).
+
+\section*{Sugestões}
+
+\begin{enumerate}
+    \item Utilizar o Trello para organizar as metas.
+    \item Procurar utilizar materiais que o Zenith já possui.
+    \item Desenhar pensando na montagem.
+    \item Peça ajuda a outros membros.
+    \item O site \href{https://grabcad.com/challenges/the-cubesat-challenge/entries}{GrabCad} possui vários modelos que podem servir de inspiração.
+\end{enumerate}
+
+\end{document}
